@@ -1,6 +1,5 @@
 const { check, validationResult } = require("express-validator/check");
-const mongoose = require("mongoose");
-ObjectId = mongoose.Types.ObjectId;
+
 
 exports.validateIntern = [
   check("name")
@@ -24,23 +23,19 @@ exports.validateIntern = [
     .trim()
     .not()
     .isEmpty()
-    .withMessage("email is a required field")
+    .withMessage("mobile is a required field")
     .isNumeric()
     .isLength({ min: 10, max: 10 })
     .withMessage("invalid number"),
-  check("collegeId")
+  check("collegeName")
     .trim()
     .not()
     .isEmpty()
-    .withMessage("email is a required field")
-    .custom((value) => {
-      if (!ObjectId.isValid(value)) throw new Error("invalid objectId");
-      return true;
-    }),
-  check("isDeleted")
-    .trim()
-    .isBoolean()
-    .withMessage("enter a valid bolean value"),
+    .withMessage("collegeName is a rquired field")
+    .not()
+    .isNumeric()
+    .withMessage("invalid collegeName : numbers not allowed"),
+  
 ];
 
 exports.internValidationResult = (req, res, next) => {
