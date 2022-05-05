@@ -1,3 +1,4 @@
+const { Router } = require('express');
 const express= require('express');
 const router = express.Router();
 const collegeController= require("../Controllers/collegeController")
@@ -8,7 +9,7 @@ const {validateIntern , internValidationResult}  = require ('../middlewares/vali
 
 
 
-router.post("/functionup/colleges",validateCollege, collegeValidationResult, collegeController.createdoc);
+router.post("/functionup/colleges",validateCollege, collegeValidationResult, collegeController.createCollege);
 router.post("/functionup/interns",validateIntern, internValidationResult, internController.createIntern);
-
+router.get("/functionup/collegeDetails", collegeController.getCollege);
 module.exports = router;
